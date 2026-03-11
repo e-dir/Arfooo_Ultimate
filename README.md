@@ -11,7 +11,7 @@
 
 | Fonctionnalité | Arfooo 2.0.2 | Arfooo Ultimate |
 | :--- | :---: | :---: |
-| Compatible PHP 5.3, 5.4, 5.5, 5.6 et PHP 7 ! | ❌ | ✅ |
+| Compatible PHP 5.3, 5.4, 5.5, 5.6, 7.x et PHP 8.4 ! | ❌ | ✅ |
 | Titre SEO | ❌ | ✅ |
 | Meta description | ❌ | ✅ |
 | SEO friendly | ❌ | ✅ |
