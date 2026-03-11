@@ -33,6 +33,6 @@ class Response extends Object
 
     public function setCookie($name, $value, $expire = 0)
     {
-        setcookie($name, $value, $expire, preg_replace("#^http://[^/]+#", "", Config::get("siteRootUrl")));
+        setcookie($name, $value, $expire, preg_replace("#^http(s)://[^/]+#", "", Config::get("siteRootUrl")));
     }
 }

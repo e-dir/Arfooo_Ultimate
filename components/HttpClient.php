@@ -58,7 +58,7 @@ class HttpClient
             $newUrl = trim($match[1]);
             $originalUrlParts = parse_url(curl_getinfo($ch, CURLINFO_EFFECTIVE_URL));
 
-            if (!preg_match('#^http://#', $newUrl)) {
+            if (!preg_match('#^http(s)://#', $newUrl)) {
                 if ($newUrl[0] != '/') {
                     if (!isset($originalUrlParts['path'])
                         || ($pos = strrpos($originalUrlParts['path'], '/')) === false
@@ -91,13 +91,13 @@ class HttpClient
     function checkResponseCodeOfSite($url)
     {
         $siteContent = $this->getSiteContent($url);
-        $responseCode = preg_match('#^HTTP/1.1 (\d+)#', $siteContent, $m) ? $m[1] : 0;
+        $responseCode = preg_match('#^http(s)/1.1 (\d+)#', $siteContent, $m) ? $m[1] : 0;
         return $responseCode;
     }
 
     function checkBacklinkOnSite($url, $backlink)
     {
-        if (!preg_match("#^http://.+#", $url)) {
+        if (!preg_match("#^http(s)://.+#", $url)) {
             return false;
         }
         $backlink = rtrim($backlink, "/");

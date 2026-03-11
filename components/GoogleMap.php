@@ -9,10 +9,11 @@
  * @author     Guillaume Hocine & Adrian Galewski
  * @license    http://creativecommons.org/licenses/by/2.0/fr/ Creative Commons
  */
-
+// Ligne 80 : VOTRE KEY APi GOOGLE MAP
 
 class GoogleMap
 {
+	
     const API_URL = 'http://maps.google.com/maps/api/js';
     const GEO_URL = 'http://maps.google.com/maps/geo';
 
@@ -75,7 +76,13 @@ class GoogleMap
 
     public function getScriptCode()
     {
-        return "\n<script src=\"" . self::API_URL. "?sensor=false\" type=\"text/javascript\"></script>\n";
+		// VOTRE KEY APi GOOGLE MAP
+		$key = '';
+		if ( $key != '' ) {
+        return "\n<script src=\"" . self::API_URL. "?key=$key&sensor=false\" type=\"text/javascript\"></script>\n";
+			} else {
+		return "\n<script src=\"" . self::API_URL. "?sensor=false\" type=\"text/javascript\"></script>\n";	
+			}
     }
 
     public function getMapCode()

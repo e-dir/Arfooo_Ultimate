@@ -66,7 +66,7 @@ class Template_Lite_Compiler extends Template_Lite {
     public $_obj_params_regexp     =   null;
 	public $_templatelite_vars		=	array();
 
-	function Template_Lite_compiler()
+	function __construct()
 	{
 		// matches double quoted strings:
 		// "foobar"

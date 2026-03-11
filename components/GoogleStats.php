@@ -8,7 +8,7 @@ class GoogleStats
 
     function getSearcherValue($url, $searcher = "google")
     {
-        $url = urlencode(preg_replace("#^http://#", "", $url));
+        $url = urlencode(preg_replace("#^http(s)://#", "", $url));
 
         $searcherUrls = array('google' => 'http://www.google.com/search?hl=en&q=site%3A' . $url,
                               'googlebl' => 'http://www.google.com/search?hl=en&q=link%3A' . $url);

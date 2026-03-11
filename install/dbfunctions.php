@@ -18,7 +18,7 @@ function executeQueryWithPrefix($sql, $tablesPrefix)
     
     //echo $sql."<br>";
     
-    return mysql_query($sql);
+    return mysqli_query($GLOBALS["___mysqli_ston"], $sql);
 }
 
 function dbConnect($server, $user, $pass, $dbName)
@@ -26,11 +26,11 @@ function dbConnect($server, $user, $pass, $dbName)
 
     /* install database with prefixed tables */
 
-    mysql_connect($server, $user, $pass) or die('could not connect to mysql');;
+    ($GLOBALS["___mysqli_ston"] = mysqli_connect($server,  $user,  $pass)) or die('could not connect to mysql');;
 
-    mysql_query('create database IF NOT EXISTS ' . $dbName);
+    mysqli_query($GLOBALS["___mysqli_ston"], 'create database IF NOT EXISTS ' . $dbName);
 
-    mysql_select_db($dbName) or die('could not select database');
+    ((bool)mysqli_query($GLOBALS["___mysqli_ston"], "USE " . $dbName)) or die('could not select database');
 }
 
 

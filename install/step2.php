@@ -29,7 +29,7 @@ $_SESSION['siteRootUrl'] = $siteRootUrl;
 $phpVersion = phpversion();
 $phpVersionCorrect = version_compare($phpVersion, "5.1", ">="); 
 
-$mysqlIndicator = !(strpos($phpinfo, '<a name="module_mysql">mysql</a>') === false);
+$mysqlIndicator = !(strpos($phpinfo, '<a name="module_mysqli">mysqli</a>') === false);
 
 $phpinfoTestModRewrite = @fopen($siteRootUrl . 'install/info.html', 'r');
 

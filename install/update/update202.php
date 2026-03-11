@@ -15,16 +15,16 @@ require_once("../../config/db.php");
 if(!empty($_POST['update']))
 {
 
-    if(!mysql_connect($dbConfig['DB_HOST'],
-                      $dbConfig['DB_USER'],
-                      $dbConfig['DB_PASS']))
+    if(!($GLOBALS["___mysqli_ston"] = mysqli_connect($dbConfig['DB_HOST'], 
+                      $dbConfig['DB_USER'], 
+                      $dbConfig['DB_PASS'])))
                       {
-                          die(mysql_error());
+                          die(((is_object($GLOBALS["___mysqli_ston"])) ? mysqli_error($GLOBALS["___mysqli_ston"]) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)));
                       }
 
-    if(!mysql_selectdb($dbConfig['DB_NAME']))
+    if(!((bool)mysqli_query($GLOBALS["___mysqli_ston"], "USE " . $dbConfig['DB_NAME'])))
     {
-        die(mysql_error());
+        die(((is_object($GLOBALS["___mysqli_ston"])) ? mysqli_error($GLOBALS["___mysqli_ston"]) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)));
     }
 
     $sqls = array();
@@ -72,11 +72,11 @@ if(!empty($_POST['update']))
 
     foreach($sqls as $sql)
     {
-        $res = mysql_query($sql);
+        $res = mysqli_query($GLOBALS["___mysqli_ston"], $sql);
 
         if(!$res)
         {
-            echo mysql_error();
+            echo ((is_object($GLOBALS["___mysqli_ston"])) ? mysqli_error($GLOBALS["___mysqli_ston"]) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false));
             exit;
         }
     }

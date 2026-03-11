@@ -145,7 +145,7 @@ class AppRouter extends Router
         $urlParts = @parse_url($url);
         if (!empty($urlParts['host'])
             && !empty($urlParts['scheme'])
-            && $urlParts['scheme'] == "http"
+            && $urlParts['scheme'] == "http" OR $urlParts['scheme'] == "https"
         ) {
             return $urlParts['scheme'] . "://" . $urlParts['host'];
         } else {

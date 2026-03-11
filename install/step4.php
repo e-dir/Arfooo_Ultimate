@@ -44,7 +44,7 @@ dbConnect($_SESSION['mysqlServer'],
           $_SESSION['mysqlDatabaseName']
           );
 
-$mysqlVersion = mysql_get_server_info();    
+$mysqlVersion = ((is_null($___mysqli_res = mysqli_get_server_info($GLOBALS["___mysqli_ston"]))) ? false : $___mysqli_res);    
 
 $mysqlVersionCorrect = version_compare($mysqlVersion, "4.1", ">=");
 

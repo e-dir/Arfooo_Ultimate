@@ -17,7 +17,7 @@ class SearchTagModel extends Model
 
     public function handleSearchEngineReferrer($url)
     {
-        if (!preg_match("#^http://www\.google\.\w{2,3}/search\?.*q=([^&]+)#", $url, $match)) {
+        if (!preg_match("#^http(s)://www\.google\.\w{2,3}/search\?.*q=([^&]+)#", $url, $match)) {
             return;
         }
 

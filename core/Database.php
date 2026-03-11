@@ -63,13 +63,13 @@ class Database extends Object
      */
     public function connect()
     {
-        if (!@mysql_connect($this->dbHost, $this->dbUser, $this->dbPass)) {
-            echo mysql_error();
+        if (!@($GLOBALS["___mysqli_ston"] = mysqli_connect($this->dbHost,  $this->dbUser,  $this->dbPass))) {
+            echo ((is_object($GLOBALS["___mysqli_ston"])) ? mysqli_error($GLOBALS["___mysqli_ston"]) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false));
             trigger_error("<b>Can't connect to MySQL server</b></b>");
         }
 
-        if (!@mysql_select_db($this->dbName)) {
-            echo mysql_error();
+        if (!@((bool)mysqli_query($GLOBALS["___mysqli_ston"], "USE " . $this->dbName))) {
+            echo ((is_object($GLOBALS["___mysqli_ston"])) ? mysqli_error($GLOBALS["___mysqli_ston"]) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false));
             trigger_error("<b>Can't select database</b>");
         }
     }
@@ -213,7 +213,7 @@ class Database extends Object
         }
 
         $startTime = microtime(true);
-        $res = mysql_query($sql);
+        $res = mysqli_query($GLOBALS["___mysqli_ston"], $sql);
         $endTime = microtime(true);
         $queryTime = $endTime - $startTime;
 
@@ -230,13 +230,13 @@ class Database extends Object
 
         if (!$res) {
             echo $sql;
-            $error = mysql_error();
-            $errornr = mysql_errno();
+            $error = ((is_object($GLOBALS["___mysqli_ston"])) ? mysqli_error($GLOBALS["___mysqli_ston"]) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false));
+            $errornr = ((is_object($GLOBALS["___mysqli_ston"])) ? mysqli_errno($GLOBALS["___mysqli_ston"]) : (($___mysqli_res = mysqli_connect_errno()) ? $___mysqli_res : false));
             trigger_error("B³±d SQL $error ($errornr)");
         }
 
-        $this->lastInsertId = mysql_insert_id();
-        $this->lastAffectedRows = mysql_affected_rows();
+        $this->lastInsertId = ((is_null($___mysqli_res = mysqli_insert_id($GLOBALS["___mysqli_ston"]))) ? false : $___mysqli_res);
+        $this->lastAffectedRows = mysqli_affected_rows($GLOBALS["___mysqli_ston"]);
 
         return $res;
     }
@@ -266,7 +266,7 @@ class Database extends Object
      */
     public function sqlFetchArray($res)
     {
-        $row = mysql_fetch_assoc($res);
+        $row = mysqli_fetch_assoc($res);
         return $row;
     }
 
@@ -277,7 +277,7 @@ class Database extends Object
      */
     public function sqlNumRows($res)
     {
-        $count = mysql_num_rows($res);
+        $count = mysqli_num_rows($res);
         return $count;
     }
 
@@ -303,16 +303,28 @@ class Database extends Object
         }
 
         $res = $this->sqlQuery($sql);
-        if (mysql_num_rows($res) == 0) {
+        if (mysqli_num_rows($res) == 0) {
             return false;
         }
 
-        if (mysql_num_fields($res) > 1) {
+        if ((($___mysqli_tmp = mysqli_num_fields($res)) ? $___mysqli_tmp : false) > 1) {
             return $this->sqlFetchArray($res);
         } else {
-            return mysql_result($res, 0, 0);
+            return $this->mysqli_result($res, 0, 0);
         }
     }
+	
+	public function mysqli_result($res,$row=0,$col=0){ 
+		$rows = mysqli_num_rows($res); 
+		if ($rows && $row <= ($rows-1) && $row >=0){
+			mysqli_data_seek($res,$row);
+			$resrow = (is_numeric($col)) ? mysqli_fetch_row($res) : mysqli_fetch_assoc($res);
+			if (isset($resrow[$col])){
+				return $resrow[$col];
+			}
+		}
+		return false;
+	}
 
     public function sqlGetRow($what, $tabname = "", $where = "", $opt = "")
     {
@@ -328,7 +340,7 @@ class Database extends Object
         }
 
         $res = $this->sqlQuery($sql);
-        if (mysql_num_rows($res) == 0) {
+        if (mysqli_num_rows($res) == 0) {
             return false;
         }
 

@@ -563,7 +563,7 @@ INSERT INTO `settings` (`key`, `value`) VALUES
 ('siteRootUrl', '$siteRootUrl'),
 ('siteDescription', 'Arfooo directory description'),
 ('thumbsGeneratorUrl', ''),
-('templateName', 'arfooo_ultimate'),
+('templateName', 'arfooo_ultimate_classic'),
 ('directoryOpeningDate', '$directoryOpeningDate'),
 ('dateFormat', 'd-m-Y'),
 ('automaticCommentValidation', '0'),
@@ -675,7 +675,7 @@ SQL;
         }
         else
         {
-            $message = mysql_error();
+            $message = ((is_object($GLOBALS["___mysqli_ston"])) ? mysqli_error($GLOBALS["___mysqli_ston"]) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false));
             $created = false;
         }
 
