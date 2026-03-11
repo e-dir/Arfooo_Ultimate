@@ -27,14 +27,16 @@
 
 ---
 
-> **⚠️ Attention !**
-> Arfooo Ultimate ne marche que sur une nouvelle installation d’Arfooo (il n’est pas possible de migrer Arfooo 2.0.2 vers Arfooo Ultimate avec l’archive mis à disposition : pour cela prendre contact avec nous). L’installation se fait comme sur les anciennes version d’Arfooo via l’archive que nous mettons à votre disposition.
+L’installation se fait comme sur les anciennes version d’Arfooo via l’archive que nous mettons à votre disposition.
 
 Si vous avez besoin d’un template exclusif ou d’une mise à jour vers Arfooo Ultimate à partir d’un Arfooo de base vous pouvez prendre contact avec nous avec ce [formulaire](https://www.e-dir.fr/#colophon) : nous répondrons à toutes vos questions.
 
 ## 📥 Téléchargement
 
-### [Télécharger Arfooo Ultimate 1.1](https://www.e-dir.fr/arfooo_ultimate/arfooo_ultimate_1.1.zip)
+
+### Change log 1.1 -> 1.2
+* Compatible avec PHP 8.4
+* Ajout d'un fichier pour migrer de Arfooo à la version Ultimate, "/install/update/update_arfooo_to_ultimate.php" : suivre la procédure de mise à jour
 
 ### Change log 1.0 -> 1.1
 * Compatible avec PHP 7
@@ -42,11 +44,34 @@ Si vous avez besoin d’un template exclusif ou d’une mise à jour vers Arfooo
 * Souci des soumissions des sites en https : OK
 * Souci avec Google map : OK (il faut ajouter votre api key : `/components/GoogleMap.php`)
 
+### [Télécharger Arfooo Ultimate 1.1](https://www.e-dir.fr/arfooo_ultimate/arfooo_ultimate_1.1.zip)
+
 ![Arfooo Ultimate Illustration](https://www.e-dir.fr/arfooo_ultimate/arfooo_ultimate.jpg)
 
 ### Procédure de mise à jour (depuis Arfooo Ultimate 1.0)
-Avant une **mise à jour** pensez à faire une sauvegarde complète de votre annuaire et à la suite de la mise à jour ne pas oublier de vider le cache.
-Pour mettre à jour : remplacer tous les fichiers et dossier **SAUF** les dossiers : `config`, `upload`, `templates` (vous pouvez upload le dossier « templates » qui contient le nouveau template mais garder le dossier déjà présent contenant le template actif sur votre annuaire) et garder aussi le fichier `.htaccess`.
+**Avant une mise à jour pensez à faire une sauvegarde complète de votre annuaire : fichiers et db et à la suite de la mise à jour ne pas oublier de vider le cache.**
+
+Tout effacer sauf : .htaccess, le dossier upload, templates ( si le template n'est pas d'origine ), le fichier db.php dans le dossier config.
+Upload les nouveaux fichier/dossier, vider le cache dans l'administration ou en supprimant le contenu des dossiers : cache et compiled.
+Après cela un rafraichissement est votre Arfooo est à jour !
+
+### Procédure de mise à jour (depuis Arfooo 2.0.2)
+Tout effacer sauf : .htaccess, le dossier upload, templates ( si le template n'est pas d'origine ), le fichier db.php dans le dossier config.
+Upload les nouveaux fichier/dossier
+Executer : "votresite.com/install/update/update_arfooo_to_ultimate.php" pour mettre à jour la base de données
+Vider le cache dans l'administration ou en supprimant le contenu des dossiers : cache et compiled.
+Après cela un rafraichissement est votre Arfooo est à jour !
+
+
+	*Si le template n'est pas d'origine :
+	/template/arfooo/sitedetails.tpl à remplacer la ligne 22 par :
+
+	{if $site.siteTitleseo != ''}
+{include file="includes/header.tpl" title=$site.siteTitleseo metaDescription=$site.sitemeta  includeSearchEngine=true}
+{else}
+{include file="includes/header.tpl" title=$site.siteTitle includeSearchEngine=true}
+	{/if}
+	
 
 ---
 

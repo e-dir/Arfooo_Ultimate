@@ -66,7 +66,7 @@
 </tr>
 <tr>
     <td>{'mainIndex_version'|lang}: </td>
-    <td><strong>{$directoryVersion} Ultimate</strong></td>
+    <td><strong>{$directoryVersion} Ultimate 1.2</strong></td>
     <td>{'mainIndex_db'|lang}: </td>
     <td><strong>{$databaseSize}</strong></td>
 </tr>

@@ -1,4 +1,4 @@
-<?php
-$UTF8_TO_ASCII[0x64] = array(
-
-);
+<?php
+$UTF8_TO_ASCII[0x64] = array(
+
+);

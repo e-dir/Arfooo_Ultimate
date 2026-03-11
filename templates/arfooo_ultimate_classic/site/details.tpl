@@ -20,7 +20,11 @@ setting.categoryId = {$site.categoryId};
 </script>
 {/capture}
 
-{include file="includes/header.tpl" title=$site.siteTitleseo metaDescription=$site.sitemeta includeSearchEngine=true}
+	{if $site.siteTitleseo != ''}
+{include file="includes/header.tpl" title=$site.siteTitleseo metaDescription=$site.sitemeta  includeSearchEngine=true}
+{else}
+{include file="includes/header.tpl" title=$site.siteTitle includeSearchEngine=true}
+	{/if}
 
 <nav class="show_arbo">
 <a href="{$setting.siteRootUrl}" class="link_showarbo">{'show_arbo_directory'|lang}</a> &gt; 

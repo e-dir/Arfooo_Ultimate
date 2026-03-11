@@ -1,11 +1,10 @@
 <?php
 /**
  * Arfooo
- * 
- * @package    Arfooo
+ * * @package    Arfooo
  * @copyright  Copyright (c) Arfooo Annuaire (fr) and Arfooo Directory (en)
- *             by Guillaume Hocine (c) 2007 - 2010
- *             http://www.arfooo.com/ (fr) and http://www.arfooo.net/ (en)
+ * by Guillaume Hocine (c) 2007 - 2010
+ * http://www.arfooo.com/ (fr) and http://www.arfooo.net/ (en)
  * @author     Guillaume Hocine & Adrian Galewski
  * @license    http://creativecommons.org/licenses/by/2.0/fr/ Creative Commons
  */
@@ -111,7 +110,7 @@ CREATE TABLE `categories` (
   `navigationName` varchar(128) NOT NULL,
   `headerDescription` varchar(255) NOT NULL,
   `metaDescription` text NOT NULL,
-  `position` smallint(5) unsigned NOT NULL,
+  `position` smallint(5) unsigned NOT NULL DEFAULT '0',
   `searchEngineSettings` text,
   PRIMARY KEY (`categoryId`),
   KEY `name` (`name`),
@@ -666,7 +665,7 @@ SQL;
         $sql = trim($sql);
         if(empty($sql))continue;
         preg_match("#CREATE TABLE `(.*?)`#", $sql, $match);
-        $tableName = $match[1];
+        $tableName = isset($match[1]) ? $match[1] : 'UnknownTable';
 
         if(executeQueryWithPrefix($sql, $tablesPrefix))
         {

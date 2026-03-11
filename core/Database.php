@@ -1,11 +1,10 @@
 <?php
 /**
  * Arfooo
- * 
- * @package    Arfooo
+ * * @package    Arfooo
  * @copyright  Copyright (c) Arfooo Annuaire (fr) and Arfooo Directory (en)
- *             by Guillaume Hocine (c) 2007 - 2010
- *             http://www.arfooo.com/ (fr) and http://www.arfooo.net/ (en)
+ * by Guillaume Hocine (c) 2007 - 2010
+ * http://www.arfooo.com/ (fr) and http://www.arfooo.net/ (en)
  * @author     Guillaume Hocine & Adrian Galewski
  * @license    http://creativecommons.org/licenses/by/2.0/fr/ Creative Commons
  */
@@ -14,7 +13,7 @@
 /**
  * Class to co-operate with MySQL database.
  */
-class Database extends Object
+class Database extends ArfoooCoreObject
 {
     private $dbHost;
     private $dbUser;
@@ -83,7 +82,8 @@ class Database extends Object
         $sql = "UPDATE $tabname SET ";
 
         foreach ($vars as $key => $value) {
-            if ($key{0} != "_") {
+            // FIX: Updated curly brace syntax to square bracket for PHP 7.4+
+            if ($key[0] != "_") {
                 $value = addslashes($value);
                 $value = "'" . $value . "'";
             }
@@ -126,7 +126,8 @@ class Database extends Object
         foreach ($varsTab as $vars) {
             $vals = array();
             foreach ($vars as $key => $val) {
-                if ($key{0} != "_") {
+                // FIX: Updated curly brace syntax to square bracket for PHP 7.4+
+                if ($key[0] != "_") {
                     $val = addslashes($val);
                     $val = "'" . $val . "'";
                 }
@@ -232,7 +233,7 @@ class Database extends Object
             echo $sql;
             $error = ((is_object($GLOBALS["___mysqli_ston"])) ? mysqli_error($GLOBALS["___mysqli_ston"]) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false));
             $errornr = ((is_object($GLOBALS["___mysqli_ston"])) ? mysqli_errno($GLOBALS["___mysqli_ston"]) : (($___mysqli_res = mysqli_connect_errno()) ? $___mysqli_res : false));
-            trigger_error("B³±d SQL $error ($errornr)");
+            trigger_error("Blad SQL $error ($errornr)");
         }
 
         $this->lastInsertId = ((is_null($___mysqli_res = mysqli_insert_id($GLOBALS["___mysqli_ston"]))) ? false : $___mysqli_res);

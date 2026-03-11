@@ -1,11 +1,10 @@
 <?php
 /**
  * Arfooo
- * 
- * @package    Arfooo
+ * * @package    Arfooo
  * @copyright  Copyright (c) Arfooo Annuaire (fr) and Arfooo Directory (en)
- *             by Guillaume Hocine (c) 2007 - 2010
- *             http://www.arfooo.com/ (fr) and http://www.arfooo.net/ (en)
+ * by Guillaume Hocine (c) 2007 - 2010
+ * http://www.arfooo.com/ (fr) and http://www.arfooo.net/ (en)
  * @author     Guillaume Hocine & Adrian Galewski
  * @license    http://creativecommons.org/licenses/by/2.0/fr/ Creative Commons
  */
@@ -44,7 +43,8 @@ dbConnect($_SESSION['mysqlServer'],
           $_SESSION['mysqlDatabaseName']
           );
 
-$mysqlVersion = ((is_null($___mysqli_res = mysqli_get_server_info($GLOBALS["___mysqli_ston"]))) ? false : $___mysqli_res);    
+global $link;
+$mysqlVersion = mysqli_get_server_info($link);    
 
 $mysqlVersionCorrect = version_compare($mysqlVersion, "4.1", ">=");
 
